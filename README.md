@@ -1,2 +1,2 @@
 # task-manager
-## Demo: http://task-manager.nfools.org/ 
+## [Demo](http://demo.nfools.org/task-manager/) 
