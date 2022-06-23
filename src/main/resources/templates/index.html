@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Task Manager</title>
+    <script th:src="@{/static/js/jquery-3.6.0.js}"></script>
+    <link th:href="@{/static/bootstrap-4.6.1-dist/css/bootstrap.css}" rel="stylesheet"/>
+    <script th:src="@{/static/bootstrap-4.6.1-dist/js/bootstrap.js}"></script>
+    <style>
+        #file-input {
+            width: 90%;
+            height: 100px;
+            border: dashed black 1px;
+        }
+        .bg-red {
+            background-color: red;
+        }
+        .bg-green {
+            background-color: green;
+        }
+        .bg-orange {
+            background-color: orange;
+        }
+        .circle{
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body class="embed-responsive-1by1">
+<button id="refresh" type="button" class="btn btn-secondary" style="float: right">
+    刷新
+</button>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" style="float: right" data-toggle="modal" data-target="#exampleModal">
+    创建任务
+</button>
+<br>
+<br>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" des>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">创建任务</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <label for="task-name">任务名称:&nbsp;</label><input id="task-name" class="input-group-lg" type="text">
+                <br>
+                <div id="file-input" style="text-align: center" tabindex="-1">
+                    <p>Put Files Here</p>
+                </div>
+                <br>
+                <label for="remarks">备注:&nbsp;</label><input id="remarks" class="input-group-lg" type="text">
+                <br>
+            </div>
+            <div class="modal-footer">
+                <div id="tips"></div>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                <button id="start" type="button" class="btn btn-primary" onclick="submit()">开始</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="task-div">
+    <table id="task-table" class="table table-bordered table-striped" th:fragment="task-table">
+        <thead>
+        <tr>
+            <th>任务名称</th>
+            <th>创建时间</th>
+            <th>修改时间</th>
+            <th>进度</th>
+            <th>备注</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="taskVO:${taskVOList}">
+            <td th:text="${taskVO.taskName}"></td>
+            <td th:text="${taskVO.createTime}"></td>
+            <td th:text="${taskVO.updatedTime}"></td>
+            <td><div th:class="'circle ' + ${100 == taskVO.progress ? 'bg-green' : (taskVO.progress >= 0 ? 'bg-orange': 'bg-red')} "></div>&nbsp;[[${taskVO.progress}]]%</td>
+            <td th:text="${taskVO.remarks}"></td>
+            <td><span><a th:href="${taskVO.viewUrl}">查看</a>&nbsp;&nbsp;<a th:data-task-id="${taskVO.id}" href="#" th:style="${-1 == taskVO.progress || 100 == taskVO.progress} ? '' : 'pointer-events: none;color:black'" th:onclick="|deleteTask(this.getAttribute('data-task-id'))|">删除</a></span></td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+<script th:src="@{/static/js/index.js}"></script>
+<div style="position: fixed; bottom: 0; width: 100%; text-align: center">Task Manager</div>
+</body>
+</html>

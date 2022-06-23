@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.nfools.taskmanager.mapper.TaskMapper">
+    <update id="updateViewUrl">
+        UPDATE `task`
+        SET `ok` = #{task.ok}, `path` = #{task.path}, `view_url` = #{task.viewUrl}
+        WHERE `id` = #{task.id}
+    </update>
+    <update id="updateProgress">
+        UPDATE `task`
+        SET `ok` = #{task.ok}
+        WHERE `id` = #{task.id}
+    </update>
+    <delete id="delete">
+        DELETE
+        FROM `task`
+        WHERE `id` = #{id}
+    </delete>
+    <select id="selectAll" resultType="org.nfools.taskmanager.entity.data.Task">
+        SELECT *
+        FROM `task`
+    </select>
+    <select id="selectById" resultType="org.nfools.taskmanager.entity.data.Task">
+        SELECT *
+        FROM `task`
+        WHERE `id` = #{id}
+    </select>
+    <insert id="insert" parameterType="org.nfools.taskmanager.entity.data.Task" keyProperty="id"
+            useGeneratedKeys="true">
+        INSERT INTO `task` (`task_name`, `ok`, `path`, `remarks`)
+        VALUE (#{task.taskName}, #{task.ok}, #{task.path}, #{task.remarks})
+    </insert>
+
+</mapper>

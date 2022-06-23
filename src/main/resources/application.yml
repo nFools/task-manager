@@ -1,0 +1,48 @@
+server:
+  port: 10000
+  servlet:
+    # DO NOT MODIFY IT !!!
+    context-path: /task-manager
+    ui-path: /ui
+    detail-path: /detail
+spring:
+  mvc:
+    static-path-pattern: /static/**
+  application:
+    name: task-manager
+  servlet:
+    multipart:
+      max-file-size: 4096MB
+      max-request-size: 4096MB
+  redis:
+    host: 127.0.0.1
+    port: 6379
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/task_manager?characterEncoding=utf-8&useSSL=false&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true
+    username: task_manager
+    password: task_manager@imcaoxuan.1999
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.example.taskmanager.entity.data
+  configuration:
+    map-underscore-to-camel-case: true
+logging:
+  level:
+    root: info
+    org:
+      nfools:
+        taskmanager: debug
+  file:
+    path: log_task_manager/
+task-manager:
+  # unit: minute
+  timeout: 5
+  api-prefix: /api
+  data-path: ${user.dir}/data/task_manager/
+  data-resource: /data/task_manager/
+  third-party:
+    # view url
+    view-url: http://localhost:${server.port}${server.servlet.context-path}${server.servlet.ui-path}${server.servlet.detail-path}
+    # analysis url
+    analysis-url: http://localhost:${server.port}${server.servlet.context-path}${task-manager.api-prefix}/analyse
