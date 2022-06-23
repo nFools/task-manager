@@ -67,7 +67,7 @@ public class ApiController {
             multipartFile.transferTo(destination);
             log.info("[{}] save {}", taskDTO.getId(), multipartFile.getOriginalFilename());
         }
-        stringRedisTemplate.opsForValue().set(String.valueOf(taskDTO.getId()), String.valueOf(0), timeout, TimeUnit.SECONDS);
+        stringRedisTemplate.opsForValue().set(String.valueOf(taskDTO.getId()), String.valueOf(0), timeout, TimeUnit.MINUTES);
         taskDTO.setPath(parent);
         taskService.startTask(taskDTO);
         taskService.updateViewUrl(taskDTO);
@@ -117,7 +117,7 @@ public class ApiController {
     @PutMapping("/update")
     public Response update(@RequestBody TaskDTO taskDTO) throws Exception {
 
-        stringRedisTemplate.opsForValue().setIfPresent(String.valueOf(taskDTO.getId()), String.valueOf(taskDTO.getProgress()), timeout, TimeUnit.SECONDS);
+        stringRedisTemplate.opsForValue().setIfPresent(String.valueOf(taskDTO.getId()), String.valueOf(taskDTO.getProgress()), timeout, TimeUnit.MINUTES);
         if (Objects.equals(100, taskDTO.getProgress())) {
             taskService.updateProgress(taskDTO);
         }
