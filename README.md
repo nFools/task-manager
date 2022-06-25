@@ -1,5 +1,7 @@
 # Task Manager
 
+English | [简体中文](./README_zh-CN.md)
+
 ## [Demo](http://demo.imcaoxuan.cn/task-manager/) 
 
 ## Getting Started
