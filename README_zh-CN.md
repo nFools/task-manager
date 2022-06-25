@@ -2,6 +2,11 @@
 
 [English](./README.md) | 简体中文
 
+## *为什么要使用它？*
+
+- 配置简单
+- ...
+
 ## [示例](http://demo.imcaoxuan.cn/task-manager/) 
 
 ## 开始
