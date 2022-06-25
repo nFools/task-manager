@@ -24,7 +24,7 @@ spring:
     password: task_manager@imcaoxuan.1999
 mybatis:
   mapper-locations: classpath:mapper/*.xml
-  type-aliases-package: com.example.taskmanager.entity.data
+  type-aliases-package: org.nfools.taskmanager.entity.data
   configuration:
     map-underscore-to-camel-case: true
 logging:
@@ -40,9 +40,8 @@ task-manager:
   timeout: 5
   api-prefix: /api
   data-path: ${user.dir}/data/task_manager/
-  data-resource: /data/task_manager/
   third-party:
-    # view url
-    view-url: http://localhost:${server.port}${server.servlet.context-path}${server.servlet.ui-path}${server.servlet.detail-path}
+    # view detail url
+    view-detail-url: ${server.servlet.context-path}${server.servlet.ui-path}${server.servlet.detail-path}
     # analysis url
-    analysis-url: http://localhost:${server.port}${server.servlet.context-path}${task-manager.api-prefix}/analyse
+    analysis-url: https://demo.nfools.org:${server.port}${server.servlet.context-path}${task-manager.api-prefix}/analyse

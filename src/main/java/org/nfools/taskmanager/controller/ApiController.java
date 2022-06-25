@@ -44,7 +44,7 @@ public class ApiController {
     @Value("${task-manager.timeout}")
     private Long timeout;
 
-    @Value("${task-manager.third-party.view-url}")
+    @Value("${task-manager.third-party.view-detail-url}")
     private String viewUrl;
 
     @PostMapping("/create-task")
