@@ -72,6 +72,7 @@ window.addEventListener("keydown", function (e) {
         if ("file-input" === document.activeElement.id) {
             files.pop()
             let message = ""
+
             for (let i = 0; i < files.length; i++) {
                 message += "[" + dataTransferFiles[i].name + "]"
                 console.log("filename " + files[i].name)
